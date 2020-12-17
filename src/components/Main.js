@@ -16,7 +16,7 @@ const Main = () => {
     const temp = {
       when: format(new Date(), "dd/MM/yyyy HH:mm"),
       xrp: xrp.data.data.last,
-    //   btc: btc.data.data.last,
+      //   btc: btc.data.data.last,
     };
 
     setData((data) => [...data, temp]);
@@ -34,18 +34,26 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="main" >
-      <LineChart
-        width={800}
-        height={500}
-        data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        <XAxis dataKey="when" />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Line type="monotone" dataKey="xrp" stroke="#ff0000" />
-      </LineChart>
+    <div className="main d-flex flex-column">
+      <div className="row d-flex flex-column">
+        <h2>Ripple Price</h2>
+        <h3>Update each 60 seconds</h3>
+        <strong>XRP/BRL | BitcoinTrade</strong>
+      </div>
+
+      <div className="mt-3">
+        <LineChart
+          width={800}
+          height={500}
+          data={data}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <XAxis dataKey="when" />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Line type="monotone" dataKey="xrp" stroke="#ff0000" />
+        </LineChart>
+      </div>
     </div>
   );
 };
