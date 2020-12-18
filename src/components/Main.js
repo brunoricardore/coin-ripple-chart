@@ -19,13 +19,14 @@ const Main = () => {
       //   btc: btc.data.data.last,
     };
 
-    setData((data) => [...data, temp]);
+    data.push(temp);
+    setData(data.slice(0, 10));
   }
 
   function ativaInterval() {
     setInterval(() => {
       fetchData();
-    }, 60000);
+    }, 5000);
   }
 
   useEffect(() => {
@@ -51,11 +52,19 @@ const Main = () => {
           <XAxis dataKey="when" />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
-          <Line type="monotone" dataKey="xrp" stroke="#ff0000" />
+          <Line type="monotone" dataKey="xrp" stroke="#ff0000" label={<CustomizedLabel/>} />
         </LineChart>
       </div>
     </div>
   );
 };
+
+const CustomizedLabel = () => ({
+  render () {
+    const {x, stroke, value} = this.props;
+		
+   	return <text x={x} y={20} dy={0} fill={stroke} fontSize={15} textAnchor="bottom">{value}</text>
+  }
+});
 
 export default Main;
